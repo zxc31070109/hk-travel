@@ -24,7 +24,8 @@ git push -u origin main
 
 echo.
 echo ====================================================
-echo   推送完成！
+echo   成功
+echo   推送成功！
 echo   手機瀏覽網址：https://zxc31070109.github.io/hk-travel/
 echo ====================================================
 echo.
