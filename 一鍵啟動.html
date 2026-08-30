@@ -1,0 +1,797 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>🇭🇰 香港 5 天 4 夜深度自由行 | 美食與動漫玩具指南</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; }
+    .no-scrollbar::-webkit-scrollbar { display: none; }
+    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+  </style>
+</head>
+<body class="bg-slate-100 antialiased text-slate-900">
+  <div id="root"></div>
+
+  <script type="text/babel">
+    const { useState, useEffect } = React;
+
+    // 圖示組件封裝
+    const Icon = ({ name, className = "w-4 h-4" }) => {
+      const ref = React.useRef(null);
+      useEffect(() => {
+        if (ref.current && window.lucide) {
+          ref.current.innerHTML = '';
+          const iconElem = document.createElement('i');
+          iconElem.setAttribute('data-lucide', name);
+          iconElem.setAttribute('class', className);
+          ref.current.appendChild(iconElem);
+          window.lucide.createIcons({
+            nameAttr: 'data-lucide',
+            attrs: { class: className },
+            element: ref.current
+          });
+        }
+      }, [name, className]);
+      return <span ref={ref} className="inline-flex items-center justify-center shrink-0" />;
+    };
+
+    function App() {
+      const [activeDay, setActiveDay] = useState(0); // 0 = 全部, 1-5 = 每日
+      const [selectedTag, setSelectedTag] = useState('ALL');
+      const [copiedId, setCopiedId] = useState(null);
+      const [showTips, setShowTips] = useState(false);
+
+      useEffect(() => {
+        if (window.lucide) {
+          window.lucide.createIcons();
+        }
+      }, [activeDay, selectedTag, showTips]);
+
+      const handleCopy = (text, id) => {
+        const el = document.createElement('textarea');
+        el.value = text;
+        document.body.appendChild(el);
+        el.select();
+        document.execCommand('copy');
+        document.body.removeChild(el);
+
+        setCopiedId(id);
+        setTimeout(() => setCopiedId(null), 2000);
+      };
+
+      const tagDefinitions = [
+        { id: 'ALL', label: '全部項目', icon: 'sparkles', color: 'bg-slate-800 text-white' },
+        { id: 'TOY', label: '陀螺 / 吉伊卡哇 / Capcom', icon: 'shopping-bag', color: 'bg-purple-600 text-white' },
+        { id: 'DRINK', label: '精品咖啡 & 絲滑奶茶', icon: 'coffee', color: 'bg-amber-600 text-white' },
+        { id: 'FOOD', label: '美式漢堡 & 越南河粉', icon: 'utensils', color: 'bg-emerald-600 text-white' },
+        { id: 'SCENIC', label: '經典景點 & 在地名店', icon: 'award', color: 'bg-rose-600 text-white' }
+      ];
+
+      const itineraryData = [
+        // --- DAY 1 ---
+        {
+          id: 'd1-1',
+          day: 1,
+          dayTitle: 'Day 1 (9/24 週四)',
+          timeSlot: '12:30 - 13:45',
+          category: 'FOOD',
+          highlightType: 'burger',
+          title: 'Honbo（中環總店）',
+          subtitle: '美式手打 Smash Burger 焦點名店',
+          address: '中環威靈頓街 97 號威利大廈地下 (近閣麟街)',
+          hours: '12:00 - 22:00',
+          arrivalTime: '建議 12:30 抵達（避開中環上班族尖峰）',
+          transit: {
+            line: '港鐵 荃灣線 (紅線)',
+            station: '中環站',
+            exit: 'D2 出口',
+            walk: '步行約 6 分鐘（沿德己立街至威靈頓街）'
+          },
+          tagText: '🍔 美式手作牛肉漢堡',
+          tagColor: 'bg-emerald-100 text-emerald-800 border-emerald-300',
+          notes: '牛肉餅高溫壓煎邊緣極酥脆，手打肉汁飽滿。推薦 Honbo 招牌雙層芝士牛肉堡，份量紮實且配自製酸黃瓜毫不油膩。'
+        },
+        {
+          id: 'd1-2',
+          day: 1,
+          dayTitle: 'Day 1 (9/24 週四)',
+          timeSlot: '14:00 - 15:30',
+          category: 'DRINK',
+          highlightType: 'coffee',
+          title: 'The Cupping Room / NOC Coffee Co.（中環）',
+          subtitle: '香港冠軍自家烘焙精品手沖與小白咖啡',
+          address: '中環閣麟街 18 號地舖（Cupping Room） / 歌賦街 18 號（NOC）',
+          hours: '08:00 - 18:00',
+          arrivalTime: '建議 14:15 抵達午茶時段',
+          transit: {
+            line: '港鐵 荃灣線 / 港島線',
+            station: '中環站',
+            exit: 'D2 / C 出口',
+            walk: '步行約 5 分鐘即可抵達中環手沖精品聚落'
+          },
+          tagText: '☕ 冠軍自家烘焙精品咖啡',
+          tagColor: 'bg-amber-100 text-amber-900 border-amber-300',
+          notes: '手沖水洗單品果酸乾淨明亮；亦可點 Flat White（小白咖啡），奶泡細緻絲滑，咖啡香氣厚實不苦澀。'
+        },
+        {
+          id: 'd1-3',
+          day: 1,
+          dayTitle: 'Day 1 (9/24 週四)',
+          timeSlot: '16:30 - 19:30',
+          category: 'SCENIC',
+          highlightType: 'scenic',
+          title: '太平山頂纜車 ＆ 凌霄閣摩天台428',
+          subtitle: '第六代綠色復古山頂纜車 ＆ 360° 戶外夜景觀景台',
+          address: '香港中環花園道 33 號山頂纜車總站',
+          hours: '07:30 - 23:00（摩天台開放至 23:00）',
+          arrivalTime: '強烈建議 16:30 抵達花園道纜車站上山',
+          transit: {
+            line: '港鐵 荃灣線 / 港島線',
+            station: '金鐘站 或 中環站',
+            exit: '金鐘站 C1 出口 / 中環站 J2 出口',
+            walk: '金鐘站 C1 穿過香港公園天橋步行約 10-12 分鐘（指標極為清楚）'
+          },
+          tagText: '⭐ 百萬維港黃昏與夜景',
+          tagColor: 'bg-rose-100 text-rose-800 border-rose-300',
+          notes: '16:30 上山能同時看到日景、夕陽餘暉與全黑後的百萬夜景。線上先買「纜車+摩天台」二合一套票掃 QR Code 進站最省時。'
+        },
+        {
+          id: 'd1-4',
+          day: 1,
+          dayTitle: 'Day 1 (9/24 週四)',
+          timeSlot: '20:15 - 21:30',
+          category: 'SCENIC',
+          highlightType: 'scenic',
+          title: '九記牛腩 或 一樂燒鵝（中環）',
+          subtitle: '香港米其林必比登／星級傳統老字號',
+          address: '中環歌賦街 21 號（九記） / 中環士丹利街 34-38 號（一樂）',
+          hours: '12:30 - 22:30（九記週日公休）',
+          arrivalTime: '建議 20:15 下山後前往',
+          transit: {
+            line: '山頂纜車下山 ➔ 步行 / 港鐵',
+            station: '中環站',
+            exit: 'D2 出口',
+            walk: '從花園道纜車站漫步下山至歌賦街約 12 分鐘'
+          },
+          tagText: '🍜 濃郁清湯牛腩 / 脆皮燒鵝',
+          tagColor: 'bg-orange-100 text-orange-800 border-orange-300',
+          notes: '九記推薦「上湯牛腩粗麵」湯頭鮮甜回甘；一樂燒鵝外皮油亮酥脆，肉質極為軟嫩。只收現金或八達通。'
+        },
+
+        // --- DAY 2 ---
+        {
+          id: 'd2-1',
+          day: 2,
+          dayTitle: 'Day 2 (9/25 週五)',
+          timeSlot: '08:30 - 09:30',
+          category: 'DRINK',
+          highlightType: 'tea',
+          title: '義順牛奶公司（油麻地／佐敦店）',
+          subtitle: '馳名雙皮燉奶 ＆ 醇厚港式滑順熱奶茶',
+          address: '油麻地彌敦道 513 號地下 / 佐敦庇利金街 63 號',
+          hours: '08:00 - 23:00',
+          arrivalTime: '建議 08:30 早餐時段',
+          transit: {
+            line: '港鐵 荃灣線 / 觀塘線',
+            station: '油麻地站 / 佐敦站',
+            exit: '油麻地站 B1 出口 / 佐敦站 C2 出口',
+            walk: '從油麻地住宿處步行 2～5 分鐘即達'
+          },
+          tagText: '☕ 雙皮燉奶 & 香滑熱奶茶',
+          tagColor: 'bg-amber-100 text-amber-900 border-amber-300',
+          notes: '點餐秘訣：奶茶請點「熱奶茶，少甜」或「走甜（無糖）」，淡奶極為絲滑濃郁；熱雙皮燉奶奶香純粹、甜度溫潤。'
+        },
+        {
+          id: 'd2-2',
+          day: 2,
+          dayTitle: 'Day 2 (9/25 週五)',
+          timeSlot: '10:00 - 20:30',
+          category: 'SCENIC',
+          highlightType: 'scenic',
+          title: '香港迪士尼樂園（全日暢遊）',
+          subtitle: '魔雪奇緣世界、城堡夜間匯演',
+          address: '香港大嶼山香港迪士尼樂園度假區',
+          hours: '10:00 - 21:00（依當日官方公佈為準）',
+          arrivalTime: '建議 09:40 抵達樂園大門安檢',
+          transit: {
+            line: '港鐵 荃灣線 ➔ 東涌線 ➔ 迪士尼線',
+            station: '迪士尼站',
+            exit: '單一出口直達樂園大門',
+            walk: '油麻地搭荃灣線至「荔景站」➔ 轉東涌線至「欣澳站」➔ 轉迪士尼專線（約 38 分鐘）'
+          },
+          tagText: '🏰 迪士尼一日遊（無的士直達）',
+          tagColor: 'bg-indigo-100 text-indigo-800 border-indigo-300',
+          notes: '中秋連假前夕人潮較多，線上購票後務必先於官網完成「入園預約」，入園先衝魔雪奇緣「魔雪奇幻之旅」與迷離莊園。'
+        },
+        {
+          id: 'd2-3',
+          day: 2,
+          dayTitle: 'Day 2 (9/25 週五)',
+          timeSlot: '21:30 - 22:45',
+          category: 'SCENIC',
+          highlightType: 'scenic',
+          title: '興記菜館（油麻地廟街）',
+          subtitle: '炭火現煲臘味煲仔飯 ＆ 酥脆現煎蠔餅',
+          address: '油麻地鴉打街 14-19 號（廟街旁）',
+          hours: '17:30 - 00:00',
+          arrivalTime: '建議 21:30 迪士尼回程後宵夜',
+          transit: {
+            line: '港鐵 迪士尼線 ➔ 欣澳 ➔ 荔景 ➔ 荃灣線',
+            station: '油麻地站',
+            exit: 'C 出口',
+            walk: '出站沿文明里轉廟街步行 3 分鐘'
+          },
+          tagText: '🍲 炭火香酥鍋巴煲仔飯',
+          tagColor: 'bg-rose-100 text-rose-800 border-rose-300',
+          notes: '煲仔飯上桌後淋上特製甜醬油悶 2 分鐘，底層焦香鍋巴超級脆！蠔餅外酥內嫩，非常合台灣胃口。'
+        },
+
+        // --- DAY 3 ---
+        {
+          id: 'd3-1',
+          day: 3,
+          dayTitle: 'Day 3 (9/26 週六)',
+          timeSlot: '11:30 - 13:00',
+          category: 'FOOD',
+          highlightType: 'pho',
+          title: 'Brass Spoon（米其林必比登越式河粉）',
+          subtitle: '牛骨長時熬煮極清甜鮮牛肉河粉',
+          address: '灣仔月街 1 號 B 地舖 / 中環砵典乍街 10 號',
+          hours: '12:00 - 19:00',
+          arrivalTime: '建議 11:45 提早排隊入座第一輪',
+          transit: {
+            line: '港鐵 荃灣線 ➔ 港島線',
+            station: '金鐘站 或 灣仔站',
+            exit: '金鐘站 F 出口 / 灣仔站 A3 出口',
+            walk: '金鐘 F 出口經太古廣場星街小區步行約 7 分鐘'
+          },
+          tagText: '🍜 米其林必比登鮮甜越式河粉',
+          tagColor: 'bg-emerald-100 text-emerald-800 border-emerald-300',
+          notes: '全香港評價最高的 Pho 之一！牛骨湯頭純粹清甜、甘香不油，生牛肉片薄嫩多汁，油條泡湯更是絕配。'
+        },
+        {
+          id: 'd3-2',
+          day: 3,
+          dayTitle: 'Day 3 (9/26 週六)',
+          timeSlot: '13:15 - 14:15',
+          category: 'SCENIC',
+          highlightType: 'scenic',
+          title: '香港百年叮叮車體驗（灣仔 ➔ 銅鑼灣）',
+          subtitle: '雙層露天復古路面電車慢速街景巡禮',
+          address: '灣仔莊士敦道沿線電車站（東行方向）',
+          hours: '06:00 - 00:00',
+          arrivalTime: '隨上隨搭（八達通刷卡只需 HK$3.0）',
+          transit: {
+            line: '香港電車（叮叮車）',
+            station: '柯布連道 / 巴路士街 電車站',
+            exit: '後門上車，前門下車刷卡',
+            walk: '吃完 Brass Spoon 漫步至莊士敦道電車站'
+          },
+          tagText: '🚋 港島百年雙層電車',
+          tagColor: 'bg-blue-100 text-blue-800 border-blue-300',
+          notes: '一定要坐上層最前排！吹著微風俯瞰香港招牌林立的街道，體驗老香港情懷最惬意方式。'
+        },
+        {
+          id: 'd3-3',
+          day: 3,
+          dayTitle: 'Day 3 (9/26 週六)',
+          timeSlot: '15:30 - 17:30',
+          category: 'TOY',
+          highlightType: 'toy',
+          title: '朗豪坊 Langham Place（旺角）',
+          subtitle: '高層動漫扭蛋玩具大本營 ＆ 吉伊卡哇週邊天堂',
+          address: '旺角亞皆老街 8 號（重點逛 10 樓 – 11 樓）',
+          hours: '11:00 - 22:00',
+          arrivalTime: '建議 15:30 抵達悠閒逛街',
+          transit: {
+            line: '港鐵 荃灣線 / 觀塘線',
+            station: '旺角站',
+            exit: 'C3 / E1 出口',
+            walk: '旺角站 C3 地下通道直達朗豪坊 B2 樓層'
+          },
+          tagText: '✨ Chiikawa 吉伊卡哇 & 日系盒玩扭蛋',
+          tagColor: 'bg-purple-100 text-purple-800 border-purple-300',
+          notes: '10-11 樓聚集了大型玩具店、扭蛋區與日系動漫專賣店，吉伊卡哇（Chiikawa）玩偶、文具、限定盲盒品項最齊全！'
+        },
+        {
+          id: 'd3-4',
+          day: 3,
+          dayTitle: 'Day 3 (9/26 週六)',
+          timeSlot: '17:45 - 20:00',
+          category: 'TOY',
+          highlightType: 'toy',
+          title: '現時點 In’s Point ＆ 信和中心（油麻地／旺角）',
+          subtitle: '香港戰鬥陀螺聖地 ＆ Capcom/ACG 模型聚集地',
+          address: '現時點：彌敦道 530-538 號 2 樓 ｜ 信和中心：彌敦道 582 號',
+          hours: '16:00 - 21:30（店家約 16:30 開齊）',
+          arrivalTime: '強烈建議 17:45 抵達（店家最齊全時段）',
+          transit: {
+            line: '港鐵 荃灣線 / 觀塘線',
+            station: '油麻地站',
+            exit: 'A2 出口',
+            walk: '出站向右轉直走 1 分鐘即達現時點；往旺角方向直走 3 分鐘達信和中心'
+          },
+          tagText: '🔥 戰鬥陀螺限定抽包/散件 & Capcom模型',
+          tagColor: 'bg-amber-100 text-amber-900 border-amber-400 font-bold',
+          notes: '【全港陀螺核心地標】現時點 2 樓有極多專門店，Beyblade X 稀有抽包、單售配件/零件、特惠整盒應有盡有；信和中心則專攻 Capcom（魔物獵人、快打旋風、惡靈古堡）遊戲周邊與手辦。'
+        },
+        {
+          id: 'd3-5',
+          day: 3,
+          dayTitle: 'Day 3 (9/26 週六)',
+          timeSlot: '20:15 - 21:30',
+          category: 'DRINK',
+          highlightType: 'tea',
+          title: '大安茶氷廳（油麻地特色老冰室）',
+          subtitle: '低甜度絲滑港式奶茶 ＆ 招牌焦糖脆皮蛋撻',
+          address: '油麻地廣東道 830 號地舖（近碧街）',
+          hours: '09:00 - 18:30 / 部分延長',
+          arrivalTime: '逛完玩具順路享用下午茶/甜點',
+          transit: {
+            line: '步行自現時點',
+            station: '油麻地站',
+            exit: 'B2 出口',
+            walk: '從現時點步行約 4 分鐘（穿過碧街即可抵達）'
+          },
+          tagText: '☕ 絲滑微苦厚奶茶 & 焦糖蛋撻',
+          tagColor: 'bg-amber-100 text-amber-900 border-amber-300',
+          notes: '半世紀老字號轉型文青冰室，茶底濃厚且絲滑不澀，點「熱奶茶，少甜」搭配表面炙燒脆脆的焦糖蛋撻，非常驚艷！'
+        },
+
+        // --- DAY 4 ---
+        {
+          id: 'd4-1',
+          day: 4,
+          dayTitle: 'Day 4 (9/27 週日·中秋節)',
+          timeSlot: '09:00 - 10:15',
+          category: 'DRINK',
+          highlightType: 'tea',
+          title: '澳洲牛奶公司（佐敦）',
+          subtitle: '全港最滑嫩炒蛋多士 ＆ 濃醇熱奶茶',
+          address: '佐敦白加士街 47-49 號地下',
+          hours: '07:30 - 22:00（週四公休，週日正常營業）',
+          arrivalTime: '建議 09:00 前抵達排隊（翻桌極快約 10 分鐘）',
+          transit: {
+            line: '港鐵 荃灣線',
+            station: '佐敦站',
+            exit: 'C2 出口',
+            walk: '出站步行 2 分鐘（從油麻地走路也只需 8 分鐘）'
+          },
+          tagText: '🥪 滑蛋厚多士 & 蛋白燉鮮奶',
+          tagColor: 'bg-amber-100 text-amber-900 border-amber-300',
+          notes: '炒蛋奶油香氣撲鼻、水嫩多汁；配一杯「熱奶茶，走甜」，享受最正宗純粹的厚茶乳香。只收現金。'
+        },
+        {
+          id: 'd4-2',
+          day: 4,
+          dayTitle: 'Day 4 (9/27 週日·中秋節)',
+          timeSlot: '10:45 - 13:30',
+          category: 'TOY',
+          highlightType: 'toy',
+          title: '海港城 ＆ 玩具"反"斗城旗艦店（尖沙咀）',
+          subtitle: '全港最大旗艦玩具店 ＆ 戰鬥陀螺官方正品全系列',
+          address: '尖沙咀廣東道 3-27 號海運大廈地下 OT G23 號舖',
+          hours: '10:00 - 22:00',
+          arrivalTime: '10:45 抵達寬敞舒適吹冷氣採購',
+          transit: {
+            line: '港鐵 荃灣線 / 屯馬線',
+            station: '尖沙咀站 / 尖東站',
+            exit: '尖沙咀站 A1 出口 / 尖東站 L6 出口',
+            walk: '步行約 6 分鐘穿過廣東道直通海港城海運大廈'
+          },
+          tagText: '🔥 全港最大陀螺旗艦專櫃 & 官方對戰盤',
+          tagColor: 'bg-purple-100 text-purple-800 border-purple-300',
+          notes: '旗艦級規模！Beyblade X 發射器、手把、官方戰鬥盤、各代基本款盒裝庫存最足，不用擔心買到改裝假貨。'
+        },
+        {
+          id: 'd4-3',
+          day: 4,
+          dayTitle: 'Day 4 (9/27 週日·中秋節)',
+          timeSlot: '14:00 - 16:30',
+          category: 'DRINK',
+          highlightType: 'coffee',
+          title: 'K11 MUSEA ＆ % ARABICA（海景咖啡）',
+          subtitle: '全港最美藝術美學百貨 ＆ 維港海岸線精品咖啡',
+          address: '尖沙咀梳士巴利道 18 號 K11 MUSEA 沿海亭（Victoria Dockside）',
+          hours: '10:00 - 22:00',
+          arrivalTime: '建議 14:00 午茶海景時段',
+          transit: {
+            line: '港鐵 屯馬線 / 荃灣線',
+            station: '尖東站',
+            exit: 'J 出口',
+            walk: '尖東站 J 出口地下直通 K11 MUSEA'
+          },
+          tagText: '☕ 海景精品拿鐵 & 頂級藝術百貨',
+          tagColor: 'bg-amber-100 text-amber-900 border-amber-300',
+          notes: 'K11 MUSEA 建築極美、品牌齊全。戶外金方塊 % ARABICA 點杯 Spanish Latte 或熱美式，坐在維港邊吹海風極致享受。'
+        },
+        {
+          id: 'd4-4',
+          day: 4,
+          dayTitle: 'Day 4 (9/27 週日·中秋節)',
+          timeSlot: '17:00 - 18:30',
+          category: 'FOOD',
+          highlightType: 'burger',
+          title: 'Shake Shack（海港城海景店） 或 Burger Circus',
+          subtitle: '坐擁無敵維港海景的美式安格斯牛肉漢堡',
+          address: '尖沙咀廣東道海港城海運大廈地下 OT G53 號舖',
+          hours: '11:00 - 22:00',
+          arrivalTime: '建議 17:00 入座看夕陽海景',
+          transit: {
+            line: '步行自維港海濱',
+            station: '尖沙咀站',
+            exit: '海港城海運大廈末端',
+            walk: '就在天星碼頭旁海港城 3 樓露台 / 地下'
+          },
+          tagText: '🍔 海景美式厚切安格斯牛肉堡',
+          tagColor: 'bg-emerald-100 text-emerald-800 border-emerald-300',
+          notes: 'ShackBurger 肉餅鮮嫩多汁，起司波浪薯條香脆濃郁，戶外座位可一覽維港夕陽暮色。'
+        },
+        {
+          id: 'd4-5',
+          day: 4,
+          dayTitle: 'Day 4 (9/27 週日·中秋節)',
+          timeSlot: '19:00 - 20:30',
+          category: 'SCENIC',
+          highlightType: 'scenic',
+          title: '天星小輪海景巡航 ＆ 維港中秋夜色',
+          subtitle: '國家地理雜誌推薦人生必遊：百年渡海小輪',
+          address: '尖沙咀天星碼頭（往中環/灣仔）',
+          hours: '06:30 - 23:30',
+          arrivalTime: '建議 19:00 搭乘（中秋滿月中維港海風）',
+          transit: {
+            line: '天星小輪渡輪（八達通感應進站）',
+            station: '尖沙咀天星碼頭',
+            exit: '刷卡即上船（上層景觀最佳約 HK$5.0）',
+            walk: '海港城出門即達碼頭'
+          },
+          tagText: '🚢 維港中秋夜景渡輪',
+          tagColor: 'bg-blue-100 text-blue-800 border-blue-300',
+          notes: '只需銅板價就能從海中央仰望兩岸摩天大樓中秋燈火，回程可搭港鐵回佐敦享用米其林佳佳甜品芝麻糊。'
+        },
+
+        // --- DAY 5 ---
+        {
+          id: 'd5-1',
+          day: 5,
+          dayTitle: 'Day 5 (9/28 週一)',
+          timeSlot: '09:00 - 10:15',
+          category: 'DRINK',
+          highlightType: 'tea',
+          title: '紅茶冰室 Hung Tea Cafe（油麻地店）',
+          subtitle: '油麻地最高人氣現代冰室 ＆ 厚茶底低糖絲滑熱奶茶',
+          address: '油麻地砵蘭街 10-16 號地下（近文明里）',
+          hours: '07:00 - 23:00',
+          arrivalTime: '建議 09:00 早餐時段',
+          transit: {
+            line: '港鐵 荃灣線 / 觀塘線',
+            station: '油麻地站',
+            exit: 'C 出口',
+            walk: '出站步行 1 分鐘即達'
+          },
+          tagText: '☕ 沙爹牛肉麵 & 低糖絲滑奶茶',
+          tagColor: 'bg-amber-100 text-amber-900 border-amber-300',
+          notes: '在地人排隊名店！「沙爹牛肉公仔麵」濃郁微辛、「新鮮出爐脆皮蛋撻」奶香酥脆；熱奶茶點「少甜」，入口順滑厚實回甘。'
+        },
+        {
+          id: 'd5-2',
+          day: 5,
+          dayTitle: 'Day 5 (9/28 週一)',
+          timeSlot: '10:30 - 12:30',
+          category: 'TOY',
+          highlightType: 'toy',
+          title: '油麻地／尖沙咀 伴手禮採買 ＆ 最後補陀螺',
+          subtitle: '帝苑蝴蝶酥 / 小熊曲奇 ＆ 現時點最後補漏',
+          address: '現時點（油麻地） / 珍妮曲奇（尖沙咀美麗都大廈 1 樓）',
+          hours: '10:00 - 19:00',
+          arrivalTime: '建議 10:30 起步採買',
+          transit: {
+            line: '港鐵 荃灣線',
+            station: '油麻地站 / 尖沙咀站',
+            exit: '油麻地 A2 / 尖沙咀 N5 出口',
+            walk: '油麻地步行採買完後回飯店退房'
+          },
+          tagText: '🎁 伴手禮採買 & 玩具最後檢查',
+          tagColor: 'bg-slate-100 text-slate-800 border-slate-300',
+          notes: '採購經典蝴蝶酥與餅乾；若陀螺有少買的零件，可在 11:30 後於油麻地/旺角周邊模型店進行最後補貨。'
+        },
+        {
+          id: 'd5-3',
+          day: 5,
+          dayTitle: 'Day 5 (9/28 週一)',
+          timeSlot: '13:00 ➔ 前往機場',
+          category: 'SCENIC',
+          highlightType: 'scenic',
+          title: '機場快線九龍站 ➔ 香港國際機場',
+          subtitle: '免搭的士，22 分鐘直達機場航廈',
+          address: '港鐵九龍站機場快線月台',
+          hours: '05:53 - 00:48',
+          arrivalTime: '依班機起飛前 2.5～3 小時抵達機場',
+          transit: {
+            line: '機場快線 (Airport Express)',
+            station: '九龍站',
+            exit: '直達機場客運大樓月台',
+            walk: '油麻地搭乘公車/港鐵至九龍站轉乘機場快線（或預約市區預辦登機）'
+          },
+          tagText: '✈️ 機場快線快速返台',
+          tagColor: 'bg-blue-100 text-blue-800 border-blue-300',
+          notes: '全程平穩寬敞無塞車風險，車廂附有免費充電插座與行李架，輕鬆結束 5 天充實旅程。'
+        }
+      ];
+
+      const filteredList = itineraryData.filter(item => {
+        const matchDay = activeDay === 0 || item.day === activeDay;
+        const matchTag = selectedTag === 'ALL' || item.category === selectedTag;
+        return matchDay && matchTag;
+      });
+
+      return (
+        <div className="min-h-screen bg-slate-100 text-slate-900 pb-16 antialiased">
+          {/* Header */}
+          <header className="bg-gradient-to-r from-slate-900 via-indigo-950 to-slate-900 text-white pt-8 pb-10 px-4 sm:px-6 shadow-xl sticky top-0 z-30">
+            <div className="max-w-6xl mx-auto">
+              <div className="flex flex-wrap items-center justify-between gap-4">
+                <div>
+                  <div className="flex items-center gap-2 text-amber-400 text-sm font-semibold tracking-wider uppercase mb-1">
+                    <span>🇭🇰 香港 5 天 4 夜深度自由行</span>
+                    <span className="bg-amber-400/20 text-amber-300 px-2 py-0.5 rounded-full text-xs">2026/09/24 - 09/28</span>
+                  </div>
+                  <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight">
+                    美食饗宴 ＆ 戰鬥陀螺·動漫玩具探索指南
+                  </h1>
+                  <p className="text-slate-300 text-sm mt-1.5 flex items-center gap-2">
+                    <Icon name="map-pin" className="w-4 h-4 text-rose-400" />
+                    <span>住宿基地：<strong>油麻地</strong> ｜ 全程港鐵、電車、渡輪 ｜ <strong>零計程車</strong></span>
+                  </p>
+                </div>
+
+                <button
+                  onClick={() => setShowTips(!showTips)}
+                  className="bg-indigo-600/80 hover:bg-indigo-600 text-white px-3.5 py-2 rounded-xl text-sm font-medium transition flex items-center gap-2 shadow-sm backdrop-blur-sm border border-indigo-400/30 cursor-pointer"
+                >
+                  <Icon name="info" className="w-4 h-4 text-amber-300" />
+                  <span>點餐與陀螺攻略小抄</span>
+                </button>
+              </div>
+
+              {/* Tag filters */}
+              <div className="mt-6 flex flex-wrap gap-2 pt-2 border-t border-slate-700/60">
+                {tagDefinitions.map(t => {
+                  const isActive = selectedTag === t.id;
+                  return (
+                    <button
+                      key={t.id}
+                      onClick={() => setSelectedTag(t.id)}
+                      className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition shadow-sm cursor-pointer ${
+                        isActive ? t.color : 'bg-slate-800/90 text-slate-300 hover:bg-slate-700'
+                      }`}
+                    >
+                      <Icon name={t.icon} className="w-3.5 h-3.5" />
+                      <span>{t.label}</span>
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+          </header>
+
+          {/* Tips Section */}
+          {showTips && (
+            <div className="max-w-6xl mx-auto px-4 sm:px-6 pt-6">
+              <div className="bg-amber-50 border border-amber-200 rounded-2xl p-5 shadow-sm text-slate-800 grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div className="space-y-1">
+                  <h4 className="font-bold text-amber-900 text-sm flex items-center gap-1.5">
+                    <Icon name="coffee" className="w-4 h-4 text-amber-700" /> 奶茶點單秘訣（不甜又絲滑）
+                  </h4>
+                  <p className="text-xs text-amber-800 leading-relaxed">
+                    港式奶茶預設加糖較甜。點單請務必說：<strong>「熱奶茶，少甜」</strong>或<strong>「熱奶茶，走甜（無糖）」</strong>，由店家附糖包自己微量調整，能喝到最極致的黑白淡奶厚實乳香與回甘茶感。
+                  </p>
+                </div>
+                <div className="space-y-1">
+                  <h4 className="font-bold text-purple-900 text-sm flex items-center gap-1.5">
+                    <Icon name="shopping-bag" className="w-4 h-4 text-purple-700" /> 陀螺 & 吉伊卡哇採購指引
+                  </h4>
+                  <p className="text-xs text-purple-800 leading-relaxed">
+                    <strong>現時點（In’s Point 2F）</strong>店家約 16:30 陸續開齊，陀螺抽包/單售散件最便宜；<strong>朗豪坊 10-11F</strong> 專攻 Chiikawa 盲盒；<strong>海港城玩具"反"斗城</strong> 買盒裝對戰盤最完整。
+                  </p>
+                </div>
+                <div className="space-y-1">
+                  <h4 className="font-bold text-emerald-900 text-sm flex items-center gap-1.5">
+                    <Icon name="train" className="w-4 h-4 text-emerald-700" /> 交通與付款小提示
+                  </h4>
+                  <p className="text-xs text-emerald-800 leading-relaxed">
+                    手機綁定 Apple/Google 錢包<strong>「八達通」</strong>全程嗶卡搭港鐵、天星小輪與叮叮車。老字號茶餐廳（九記、澳牛、興記）建議常備少許港幣現鈔。
+                  </p>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* Day Tabs */}
+          <div className="max-w-6xl mx-auto px-4 sm:px-6 pt-6">
+            <div className="bg-white p-1.5 rounded-2xl shadow-sm border border-slate-200/80 flex overflow-x-auto no-scrollbar gap-1">
+              {[
+                { id: 0, label: '全部行程', sub: '5 天彙整' },
+                { id: 1, label: 'Day 1 (9/24)', sub: '漢堡/咖啡/山頂纜車' },
+                { id: 2, label: 'Day 2 (9/25)', sub: '燉奶/迪士尼/煲仔飯' },
+                { id: 3, label: 'Day 3 (9/26)', sub: '越式Pho/陀螺/Chiikawa' },
+                { id: 4, label: 'Day 4 (9/27)', sub: '滑蛋/海景咖啡/渡輪' },
+                { id: 5, label: 'Day 5 (9/28)', sub: '紅茶冰室/伴手禮/返台' },
+              ].map(tab => (
+                <button
+                  key={tab.id}
+                  onClick={() => setActiveDay(tab.id)}
+                  className={`flex-1 min-w-[120px] py-2.5 px-3 rounded-xl text-center transition cursor-pointer ${
+                    activeDay === tab.id
+                      ? 'bg-slate-900 text-white shadow font-semibold'
+                      : 'text-slate-600 hover:bg-slate-100'
+                  }`}
+                >
+                  <div className="text-xs sm:text-sm font-bold leading-tight">{tab.label}</div>
+                  <div className={`text-[10px] mt-0.5 ${activeDay === tab.id ? 'text-amber-300' : 'text-slate-400'}`}>
+                    {tab.sub}
+                  </div>
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* Cards Grid */}
+          <main className="max-w-6xl mx-auto px-4 sm:px-6 pt-6">
+            {filteredList.length === 0 ? (
+              <div className="bg-white rounded-2xl p-12 text-center text-slate-500 border border-slate-200">
+                <Icon name="filter" className="w-10 h-10 mx-auto text-slate-300 mb-2" />
+                <p className="text-base font-medium">此篩選條件下無符合項目</p>
+                <button 
+                  onClick={() => { setActiveDay(0); setSelectedTag('ALL'); }}
+                  className="mt-3 text-xs text-indigo-600 font-semibold underline cursor-pointer"
+                >
+                  重設所有篩選
+                </button>
+              </div>
+            ) : (
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+                {filteredList.map((item) => {
+                  const isToy = item.highlightType === 'toy';
+                  const isDrink = item.highlightType === 'tea' || item.highlightType === 'coffee';
+                  const isFood = item.highlightType === 'burger' || item.highlightType === 'pho';
+
+                  let borderAccent = 'border-slate-200 hover:border-slate-300';
+                  let topGlow = '';
+                  if (isToy) {
+                    borderAccent = 'border-purple-300 hover:border-purple-500 ring-1 ring-purple-200/70';
+                    topGlow = 'bg-gradient-to-r from-purple-500 to-indigo-500';
+                  } else if (isDrink) {
+                    borderAccent = 'border-amber-300 hover:border-amber-500 ring-1 ring-amber-200/70';
+                    topGlow = 'bg-gradient-to-r from-amber-500 to-orange-500';
+                  } else if (isFood) {
+                    borderAccent = 'border-emerald-300 hover:border-emerald-500 ring-1 ring-emerald-200/70';
+                    topGlow = 'bg-gradient-to-r from-emerald-500 to-teal-500';
+                  }
+
+                  return (
+                    <div
+                      key={item.id}
+                      className={`bg-white rounded-2xl shadow-sm hover:shadow-md transition-all duration-200 flex flex-col justify-between overflow-hidden border ${borderAccent}`}
+                    >
+                      {topGlow && <div className={`h-1.5 w-full ${topGlow}`} />}
+
+                      <div className="p-5 flex-1 flex flex-col justify-between">
+                        <div>
+                          {/* Time & Tag */}
+                          <div className="flex items-center justify-between gap-2 mb-2.5">
+                            <span className="inline-flex items-center gap-1 text-[11px] font-bold text-slate-500 bg-slate-100 px-2.5 py-1 rounded-md">
+                              <Icon name="clock" className="w-3 h-3 text-slate-400" />
+                              {item.timeSlot}
+                            </span>
+                            <span className={`text-[11px] font-bold px-2.5 py-1 rounded-md border ${item.tagColor}`}>
+                              {item.tagText}
+                            </span>
+                          </div>
+
+                          {/* Title & Subtitle */}
+                          <h3 className="text-lg font-extrabold text-slate-900 leading-snug tracking-tight">
+                            {item.title}
+                          </h3>
+                          <p className="text-xs text-slate-500 mt-0.5 font-medium">
+                            {item.subtitle}
+                          </p>
+
+                          {/* Hours & Arrival */}
+                          <div className="mt-3.5 space-y-2 bg-slate-50/80 p-3 rounded-xl border border-slate-100 text-xs">
+                            <div className="flex items-start gap-2 text-slate-700">
+                              <Icon name="clock" className="w-3.5 h-3.5 text-indigo-500 mt-0.5 shrink-0" />
+                              <div>
+                                <span className="font-semibold text-slate-900">營業時間：</span>
+                                <span>{item.hours}</span>
+                              </div>
+                            </div>
+
+                            <div className="flex items-start gap-2 text-amber-900 bg-amber-50/80 p-1.5 rounded-lg border border-amber-200/50">
+                              <Icon name="bookmark" className="w-3.5 h-3.5 text-amber-600 mt-0.5 shrink-0" />
+                              <div>
+                                <span className="font-bold">建議時段：</span>
+                                <span>{item.arrivalTime}</span>
+                              </div>
+                            </div>
+                          </div>
+
+                          {/* Transit */}
+                          <div className="mt-3 bg-gradient-to-br from-indigo-50/70 to-slate-50 p-3 rounded-xl border border-indigo-100 text-xs">
+                            <div className="flex items-center gap-1.5 font-bold text-indigo-950 mb-1">
+                              <Icon name="train" className="w-3.5 h-3.5 text-indigo-600" />
+                              <span>港鐵交通指引</span>
+                            </div>
+                            <div className="space-y-1 text-slate-700">
+                              <div className="flex items-center gap-1.5">
+                                <span className="font-semibold text-indigo-900 bg-indigo-100/70 px-1.5 py-0.5 rounded text-[11px]">
+                                  {item.transit.line}
+                                </span>
+                                <span className="font-bold text-slate-900">{item.transit.station}</span>
+                                <span className="bg-rose-50 text-rose-700 font-extrabold px-1.5 py-0.2 rounded border border-rose-200 text-[11px]">
+                                  {item.transit.exit}
+                                </span>
+                              </div>
+                              <p className="text-[11px] text-slate-600 pl-0.5 leading-tight pt-0.5">
+                                📍 {item.transit.walk}
+                              </p>
+                            </div>
+                          </div>
+
+                          {/* Address & Copy */}
+                          <div className="mt-3 flex items-start justify-between gap-2 text-xs text-slate-500 bg-white p-2 rounded-lg border border-slate-200">
+                            <div className="flex items-start gap-1.5">
+                              <Icon name="map-pin" className="w-3.5 h-3.5 text-rose-500 mt-0.5 shrink-0" />
+                              <span className="leading-tight text-[11px] text-slate-600">{item.address}</span>
+                            </div>
+                            <button
+                              onClick={() => handleCopy(item.address, item.id)}
+                              title="複製地址"
+                              className="shrink-0 text-slate-400 hover:text-indigo-600 p-1 hover:bg-slate-100 rounded transition cursor-pointer"
+                            >
+                              {copiedId === item.id ? (
+                                <Icon name="check-circle-2" className="w-4 h-4 text-emerald-600" />
+                              ) : (
+                                <Icon name="copy" className="w-4 h-4" />
+                              )}
+                            </button>
+                          </div>
+                        </div>
+
+                        {/* Notes */}
+                        <div className="mt-3.5 pt-3 border-t border-dashed border-slate-200">
+                          <p className="text-xs text-slate-600 leading-relaxed">
+                            <strong className="text-slate-800">💡 重點備忘：</strong>{item.notes}
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            )}
+          </main>
+
+          {/* Footer */}
+          <footer className="max-w-6xl mx-auto px-4 sm:px-6 mt-12 text-center text-xs text-slate-500">
+            <p>港鐵營運時間約為 06:00 至 00:30 ｜ 各店家營業時間請以現場實際情況為準</p>
+            <p className="mt-1 font-medium text-slate-600">祝您在香港擁有豐富滿足的美食與動漫玩具之旅！🇭🇰✨</p>
+          </footer>
+        </div>
+      );
+    }
+
+    const root = ReactDOM.createRoot(document.getElementById('root'));
+    root.render(<App />);
+  </script>
+</body>
+</html>
