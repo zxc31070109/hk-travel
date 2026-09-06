@@ -8,11 +8,11 @@ import {
 export default function App() {
   const [activeDay, setActiveDay] = useState(0); // 0 = 全部, 1-5 = 每日
   const [selectedTag, setSelectedTag] = useState('ALL');
-  const [copiedId, setCopiedId] = useState(null);
+  const [copiedId, setCopiedId] = useState<string | null>(null);
   const [showTips, setShowTips] = useState(false);
 
   // 複製地址輔助函式 (相容 iFrame 環境)
-  const handleCopy = (text, id) => {
+  const handleCopy = (text: string, id: string) => {
     const el = document.createElement('textarea');
     el.value = text;
     document.body.appendChild(el);
@@ -22,6 +22,13 @@ export default function App() {
 
     setCopiedId(id);
     setTimeout(() => setCopiedId(null), 2000);
+  };
+
+  // 智慧產生 Google Maps 搜尋關鍵字
+  const getMapQuery = (title: string, address: string) => {
+    const primaryTitle = title.split(' 或 ')[0].split(' / ')[0].replace(/（.*?）|\(.*?\)/g, '').trim();
+    const cleanAddress = address.split(' / ')[0].split(' ｜ ')[0].replace(/（.*?）|\(.*?\)/g, '').trim();
+    return `${primaryTitle} ${cleanAddress}`;
   };
 
   const tagDefinitions = [
@@ -513,7 +520,7 @@ export default function App() {
 
             <button
               onClick={() => setShowTips(!showTips)}
-              className="bg-indigo-600/80 hover:bg-indigo-600 text-white px-3.5 py-2 rounded-xl text-sm font-medium transition flex items-center gap-2 shadow-sm backdrop-blur-sm border border-indigo-400/30"
+              className="bg-indigo-600/80 hover:bg-indigo-600 text-white px-3.5 py-2 rounded-xl text-sm font-medium transition flex items-center gap-2 shadow-sm backdrop-blur-sm border border-indigo-400/30 cursor-pointer"
             >
               <Info className="w-4 h-4 text-amber-300" />
               <span>點餐與陀螺攻略小抄</span>
@@ -529,7 +536,7 @@ export default function App() {
                 <button
                   key={t.id}
                   onClick={() => setSelectedTag(t.id)}
-                  className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition shadow-sm ${
+                  className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition shadow-sm cursor-pointer ${
                     isActive ? t.color : 'bg-slate-800/90 text-slate-300 hover:bg-slate-700'
                   }`}
                 >
@@ -588,7 +595,7 @@ export default function App() {
             <button
               key={tab.id}
               onClick={() => setActiveDay(tab.id)}
-              className={`flex-1 min-w-[120px] py-2.5 px-3 rounded-xl text-center transition ${
+              className={`flex-1 min-w-[120px] py-2.5 px-3 rounded-xl text-center transition cursor-pointer ${
                 activeDay === tab.id
                   ? 'bg-slate-900 text-white shadow font-semibold'
                   : 'text-slate-600 hover:bg-slate-100'
@@ -611,7 +618,7 @@ export default function App() {
             <p className="text-base font-medium">此篩選條件下無符合項目</p>
             <button 
               onClick={() => { setActiveDay(0); setSelectedTag('ALL'); }}
-              className="mt-3 text-xs text-indigo-600 font-semibold underline"
+              className="mt-3 text-xs text-indigo-600 font-semibold underline cursor-pointer"
             >
               重設所有篩選
             </button>
@@ -707,23 +714,49 @@ export default function App() {
                         </div>
                       </div>
 
-                      {/* 地址欄與一鍵複製 */}
-                      <div className="mt-3 flex items-start justify-between gap-2 text-xs text-slate-500 bg-white p-2 rounded-lg border border-slate-200">
-                        <div className="flex items-start gap-1.5">
+                      {/* 地址欄與一鍵 Google Maps 導航 / 複製 */}
+                      <div className="mt-3 bg-slate-50/90 rounded-xl p-2.5 border border-slate-200/80 space-y-2">
+                        <div className="flex items-start gap-1.5 text-xs text-slate-600">
                           <MapPin className="w-3.5 h-3.5 text-rose-500 mt-0.5 shrink-0" />
-                          <span className="leading-tight text-[11px] text-slate-600">{item.address}</span>
+                          <span className="leading-tight text-[11px] font-medium text-slate-700">{item.address}</span>
                         </div>
-                        <button
-                          onClick={() => handleCopy(item.address, item.id)}
-                          title="複製地址"
-                          className="shrink-0 text-slate-400 hover:text-indigo-600 p-1 hover:bg-slate-100 rounded transition"
-                        >
-                          {copiedId === item.id ? (
-                            <CheckCircle2 className="w-4 h-4 text-emerald-600" />
-                          ) : (
-                            <Copy className="w-4 h-4" />
-                          )}
-                        </button>
+                        
+                        <div className="flex items-center gap-2 pt-1 border-t border-slate-200/60">
+                          {/* 一鍵 Google Maps 搜尋導航按鈕 */}
+                          <a
+                            href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(getMapQuery(item.title, item.address))}`}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            title="一鍵在 Google Maps 開啟並搜尋導航"
+                            className="flex-1 inline-flex items-center justify-center gap-1.5 py-1.5 px-3 bg-rose-500 hover:bg-rose-600 active:scale-[0.98] text-white text-xs font-semibold rounded-lg shadow-xs transition cursor-pointer"
+                          >
+                            <Navigation className="w-3.5 h-3.5 text-rose-100" />
+                            <span>Google Maps 導航</span>
+                          </a>
+
+                          {/* 一鍵複製地址按鈕 */}
+                          <button
+                            onClick={() => handleCopy(item.address, item.id)}
+                            title="複製完整地址"
+                            className={`inline-flex items-center justify-center gap-1 py-1.5 px-2.5 text-xs font-medium rounded-lg border transition cursor-pointer shrink-0 ${
+                              copiedId === item.id
+                                ? 'bg-emerald-50 text-emerald-700 border-emerald-300'
+                                : 'bg-white hover:bg-slate-100 text-slate-600 border-slate-200'
+                            }`}
+                          >
+                            {copiedId === item.id ? (
+                              <>
+                                <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />
+                                <span className="text-[11px] font-bold">已複製</span>
+                              </>
+                            ) : (
+                              <>
+                                <Copy className="w-3.5 h-3.5 text-slate-400" />
+                                <span className="text-[11px]">複製地址</span>
+                              </>
+                            )}
+                          </button>
+                        </div>
                       </div>
                     </div>
 
