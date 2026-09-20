@@ -45,89 +45,133 @@ export default function App() {
       id: 'd1-1',
       day: 1,
       dayTitle: 'Day 1 (9/24 週四)',
-      timeSlot: '12:30 - 13:45',
-      category: 'FOOD',
-      highlightType: 'burger',
-      title: 'Honbo（中環總店）',
-      subtitle: '美式手打 Smash Burger 焦點名店',
-      address: '中環擺花街 8 號地下 2 號舖（近中環半山手扶梯）',
-      hours: '12:00 - 22:00',
-      arrivalTime: '建議 12:30 抵達（避開中環上班族尖峰）',
+      timeSlot: '12:00 - 12:30',
+      category: 'SCENIC',
+      highlightType: 'scenic',
+      title: '抵達油麻地住宿 ＆ Check-in 寄放行李',
+      subtitle: '市區中心安頓行囊 ＆ 輕裝上陣開啟香港自由行',
+      address: '香港油麻地彌敦道住宿飯店',
+      hours: '飯店全日接待（行李可免費寄存禮賓部）',
+      arrivalTime: '約 12:00 抵達油麻地飯店辦理手續',
       transit: {
-        line: '港鐵 荃灣線 (紅線)',
-        station: '中環站',
-        exit: 'D2 出口',
-        walk: '步行約 5 分鐘（沿德己立街轉威靈頓街至擺花街）'
+        line: '機場快線 ➔ 的士 / 城巴 A21',
+        station: '油麻地站 / 九龍站',
+        exit: '油麻地站各出口即達彌敦道',
+        walk: '香港機場搭機場快線至九龍站搭的士（約 8 分鐘，HK$40-50）或搭城巴 A21 直達油麻地'
       },
-      tagText: '🍔 美式手作牛肉漢堡',
-      tagColor: 'bg-emerald-100 text-emerald-800 border-emerald-300',
-      notes: '牛肉餅高溫壓煎邊緣極酥脆，手打肉汁飽滿。推薦 Honbo 招牌雙層芝士牛肉堡。💡【Threads 爆紅 ❤️‍🔥】全港第一排隊蛋撻 Bakehouse（擺花街 5 號）就在正對面！吃完漢堡順道外帶酸種蛋撻！'
+      tagText: '🧳 飯店 Check-in & 行李寄存',
+      tagColor: 'bg-blue-100 text-blue-800 border-blue-300 font-bold',
+      notes: '12:00 順利抵達油麻地飯店辦妥入住或將大件行李寄存在櫃檯，換上隨身隨行小包，以最輕盈的狀態正式開啟香港 5 天之旅！'
     },
     {
       id: 'd1-2',
       day: 1,
       dayTitle: 'Day 1 (9/24 週四)',
-      timeSlot: '14:00 - 15:30',
-      category: 'DRINK',
-      highlightType: 'coffee',
-      title: 'The Cupping Room / NOC Coffee Co.（中環）',
-      subtitle: '香港冠軍自家烘焙精品手沖與小白咖啡',
-      address: '中環閣麟街 18 號地舖（Cupping Room） / 嘉咸街 34 號地舖（NOC）',
-      hours: '08:00 - 18:00',
-      arrivalTime: '建議 14:15 抵達午茶時段',
+      timeSlot: '12:45 - 14:00',
+      category: 'FOOD',
+      highlightType: 'pho',
+      title: 'Brass Spoon（米其林必比登越式河粉）',
+      subtitle: '牛骨長時熬煮極清甜鮮牛肉河粉 ＆ 酥脆油條泡湯絕配',
+      address: '灣仔月街 1 號 B 地舖 / 中環威靈頓街 50 號',
+      hours: '12:00 - 19:00',
+      arrivalTime: '建議 12:45 抵達享用午餐',
       transit: {
-        line: '港鐵 荃灣線 / 港島線',
-        station: '中環站',
-        exit: 'D2 / C 出口',
-        walk: '步行約 5 分鐘即可抵達中環手沖精品聚落'
+        line: '港鐵 荃灣線 ➔ 港島線',
+        station: '金鐘站 或 灣仔站',
+        exit: '金鐘站 F 出口 / 灣仔站 A3 出口',
+        walk: '從油麻地搭荃灣線僅 4 站（約 11 分鐘）直達金鐘，出站步行約 6 分鐘即達'
       },
-      tagText: '☕ 冠軍自家烘焙精品咖啡',
-      tagColor: 'bg-amber-100 text-amber-900 border-amber-300',
-      notes: '手沖水洗單品果酸乾淨明亮；亦可點 Flat White（小白咖啡），奶泡細緻絲滑，咖啡香氣厚實不苦澀。'
+      tagText: '🍜 米其林必比登鮮甜越式河粉',
+      tagColor: 'bg-emerald-100 text-emerald-800 border-emerald-300 font-bold',
+      notes: '全香港評價最高的 Pho 之一！以純牛骨長時精熬出的湯頭清甜回甘、香醇不膩，鮮生牛肉片嫩滑多汁，加點酥脆油條浸泡湯汁入口更是絕配。💡【方便度極致建議】：若剛下飛機稍感疲憊想免去過海交通，亦可直接在油麻地飯店周邊（如富華冰室、興記煲仔飯、生記粥品）或直接前往朗豪坊美食街就近用餐，隨心安排最彈性！'
     },
     {
       id: 'd1-3',
       day: 1,
       dayTitle: 'Day 1 (9/24 週四)',
-      timeSlot: '16:30 - 19:30',
+      timeSlot: '14:15 - 15:15',
       category: 'SCENIC',
       highlightType: 'scenic',
-      title: '太平山頂纜車 ＆ 凌霄閣摩天台428',
-      subtitle: '第六代綠色復古山頂纜車 ＆ 360° 戶外夜景觀景台',
-      address: '香港中環花園道 33 號山頂纜車總站',
-      hours: '07:30 - 23:00（摩天台開放至 23:00）',
-      arrivalTime: '強烈建議 16:30 抵達花園道纜車站上山',
+      title: '香港百年叮叮車體驗（灣仔 ➔ 銅鑼灣）',
+      subtitle: '雙層露天復古路面電車慢速街景巡禮',
+      address: '灣仔莊士敦道沿線電車站（東行方向）',
+      hours: '06:00 - 00:00',
+      arrivalTime: '隨上隨搭（八達通刷卡只需 HK$3.0）',
       transit: {
-        line: '港鐵 荃灣線 / 港島線',
-        station: '金鐘站 或 中環站',
-        exit: '金鐘站 C1 出口 / 中環站 J2 出口',
-        walk: '金鐘站 C1 穿過香港公園天橋步行約 10-12 分鐘（指標極為清楚）'
+        line: '香港電車（叮叮車）',
+        station: '柯布連道 / 巴路士街 電車站',
+        exit: '後門上車，前門下車刷卡',
+        walk: '吃完 Brass Spoon 漫步至莊士敦道電車站上車'
       },
-      tagText: '⭐ 百萬維港黃昏與夜景',
-      tagColor: 'bg-rose-100 text-rose-800 border-rose-300',
-      notes: '16:30 上山能同時看到日景、夕陽餘暉與全黑後的百萬夜景。線上先買「纜車+摩天台」二合一套票掃 QR Code 進站最省時。'
+      tagText: '🚋 港島百年雙層電車',
+      tagColor: 'bg-blue-100 text-blue-800 border-blue-300',
+      notes: '一定要坐上層最前排！吹著微風俯瞰香港招牌林立的街道，體驗老香港情懷最惬意方式。搭至銅鑼灣後，搭乘港鐵港島線至金鐘轉荃灣線回旺角（全程僅約 14 分鐘）。'
     },
     {
       id: 'd1-4',
       day: 1,
       dayTitle: 'Day 1 (9/24 週四)',
-      timeSlot: '20:15 - 21:30',
-      category: 'SCENIC',
-      highlightType: 'scenic',
-      title: '九記牛腩 或 一樂燒鵝（中環）',
-      subtitle: '香港米其林必比登／星級傳統老字號',
-      address: '中環歌賦街 21 號（九記） / 中環士丹利街 34-38 號（一樂）',
-      hours: '12:30 - 22:30（九記週日公休）',
-      arrivalTime: '建議 20:15 下山後前往',
+      timeSlot: '15:30 - 17:30',
+      category: 'TOY',
+      highlightType: 'toy',
+      title: '朗豪坊 Langham Place（旺角）',
+      subtitle: '高層動漫扭蛋玩具大本營 ＆ 吉伊卡哇週邊天堂',
+      address: '旺角亞皆老街 8 號（重點逛 10 樓 – 11 樓）',
+      hours: '11:00 - 22:00',
+      arrivalTime: '建議 15:30 抵達悠閒逛街',
       transit: {
-        line: '山頂纜車下山 ➔ 步行 / 港鐵',
-        station: '中環站',
-        exit: 'D2 出口',
-        walk: '從花園道纜車站漫步下山至歌賦街約 12 分鐘'
+        line: '港鐵 荃灣線 / 觀塘線',
+        station: '旺角站',
+        exit: 'C3 / E1 出口',
+        walk: '旺角站 C3 地下通道直達朗豪坊 B2 樓層'
       },
-      tagText: '🍜 濃郁清湯牛腩 / 脆皮燒鵝',
-      tagColor: 'bg-orange-100 text-orange-800 border-orange-300',
-      notes: '九記推薦「上湯牛腩粗麵」湯頭鮮甜回甘；一樂燒鵝外皮油亮酥脆，肉質極為軟嫩。只收現金或八達通。'
+      tagText: '✨ Chiikawa 吉伊卡哇 & 日系盒玩扭蛋',
+      tagColor: 'bg-purple-100 text-purple-800 border-purple-300 font-bold',
+      notes: '10-11 樓聚集了大型玩具店、扭蛋區與日系動漫專賣店，吉伊卡哇（Chiikawa）玩偶、文具、限定盲盒品項最齊全！'
+    },
+    {
+      id: 'd1-5',
+      day: 1,
+      dayTitle: 'Day 1 (9/24 週四)',
+      timeSlot: '17:45 - 20:00',
+      category: 'TOY',
+      highlightType: 'toy',
+      title: '現時點 In’s Point ＆ 信和中心（油麻地／旺角）',
+      subtitle: '香港戰鬥陀螺聖地 ＆ Capcom/ACG 模型聚集地',
+      address: '現時點：彌敦道 530-538 號 2 樓 ｜ 信和中心：彌敦道 582 號',
+      hours: '16:00 - 21:30（店家約 16:30 開齊）',
+      arrivalTime: '強烈建議 17:45 抵達（店家最齊全時段）',
+      transit: {
+        line: '港鐵 荃灣線 / 觀塘線',
+        station: '油麻地站',
+        exit: 'A2 出口',
+        walk: '出站向右轉直走 1 分鐘即達現時點；往旺角方向直走 3 分鐘達信和中心'
+      },
+      tagText: '🔥 戰鬥陀螺限定抽包/散件 & Capcom模型',
+      tagColor: 'bg-amber-100 text-amber-900 border-amber-400 font-bold',
+      notes: '【全港陀螺核心地標】現時點 2 樓有極多專門店，Beyblade X 稀有抽包、單售配件/零件、特惠整盒應有盡有；信和中心則專攻 Capcom（魔物獵人、快打旋風、惡靈古堡）遊戲周邊與手辦。買完戰利品步行 2 分鐘即可先送回油麻地飯店！'
+    },
+    {
+      id: 'd1-6',
+      day: 1,
+      dayTitle: 'Day 1 (9/24 週四)',
+      timeSlot: '20:15 - 21:45',
+      category: 'FOOD',
+      highlightType: 'pho',
+      title: '一點心 One Dim Sum ❤️‍🔥（米其林平價點心天花板）',
+      subtitle: '招牌晶瑩鮮蝦餃、炸蒜魷魚鬚、叉燒包與香煎蘿蔔糕',
+      address: '太子運動場道 15 號京華大廈地舖',
+      hours: '10:00 - 00:00（營業至午夜）',
+      arrivalTime: '建議 20:15 逛完現時點/信和中心後前往',
+      transit: {
+        line: '港鐵 荃灣線 / 觀塘線',
+        station: '太子站',
+        exit: 'A 出口',
+        walk: '出站步行 2 分鐘（從旺角信和中心搭 1 站港鐵或沿彌敦道步行 10 分鐘）'
+      },
+      tagText: '🥟 米其林必比登星級點心宵夜',
+      tagColor: 'bg-rose-100 text-rose-800 border-rose-300 font-bold',
+      notes: '【Threads 清單大推 ❤️‍🔥】全港評價最高且超平價的米其林推薦點心名店！完美解決原大安茶氷廳 19:00 打烊的問題。買完陀螺與動漫周邊後，來籠熱騰騰爆汁鮮蝦餃、蒜香濃郁炸魷魚鬚與流沙包，極致滿足！'
     },
 
     // --- DAY 2 ---
@@ -270,111 +314,111 @@ export default function App() {
       id: 'd3-1',
       day: 3,
       dayTitle: 'Day 3 (9/26 週六)',
-      timeSlot: '11:30 - 13:00',
-      category: 'FOOD',
-      highlightType: 'pho',
-      title: 'Brass Spoon（米其林必比登越式河粉）',
-      subtitle: '牛骨長時熬煮極清甜鮮牛肉河粉',
-      address: '灣仔月街 1 號 B 地舖 / 中環砵典乍街 10 號',
-      hours: '12:00 - 19:00',
-      arrivalTime: '建議 11:45 提早排隊入座第一輪',
+      timeSlot: '09:30 - 11:30',
+      category: 'SCENIC',
+      highlightType: 'scenic',
+      title: '大館 Tai Kwun ＆ 中環半山手扶梯',
+      subtitle: '前中區警署百年紅磚古蹟群 ＆ 世界最長戶外有蓋手扶梯漫步',
+      address: '香港中環荷李活道 10 號（大館） ｜ 中環中街至半山（手扶梯）',
+      hours: '08:00 - 23:00（大館建築群免費參觀）',
+      arrivalTime: '建議 09:30 - 10:00 抵達（早晨遊客少、光影極美最好拍）',
       transit: {
-        line: '港鐵 荃灣線 ➔ 港島線',
-        station: '金鐘站 或 灣仔站',
-        exit: '金鐘站 F 出口 / 灣仔站 A3 出口',
-        walk: '金鐘 F 出口經太古廣場星街小區步行約 7 分鐘'
+        line: '港鐵 荃灣線 (紅線) 直達',
+        station: '中環站',
+        exit: 'D2 / C 出口',
+        walk: '油麻地搭港鐵 12 分鐘直達中環站，出站沿德己立街轉皇后大道中，搭半山手扶梯至荷李活道（直通大館檢閱廣場）'
       },
-      tagText: '🍜 米其林必比登鮮甜越式河粉',
-      tagColor: 'bg-emerald-100 text-emerald-800 border-emerald-300',
-      notes: '全香港評價最高的 Pho 之一！牛骨湯頭純粹清甜、甘香不油，生牛肉片薄嫩多汁，油條泡湯更是絕配。'
+      tagText: '⭐ 百年紅磚警署古蹟群 & 半山手扶梯',
+      tagColor: 'bg-rose-100 text-rose-800 border-rose-300 font-bold',
+      notes: '【中環早晨經典文化景點】16 座維多利亞及愛德華風格紅磚歷史建築群，前身為香港警署、裁判司署與域多利監獄。搭乘半山手扶梯沿途可欣賞經典嘉咸街塗鴉壁畫、骨董街，漫步進入大館檢閱廣場與營房大樓，晨光下紅磚拍照極具張力且免費開放！'
     },
     {
       id: 'd3-2',
       day: 3,
       dayTitle: 'Day 3 (9/26 週六)',
-      timeSlot: '13:15 - 14:15',
-      category: 'SCENIC',
-      highlightType: 'scenic',
-      title: '香港百年叮叮車體驗（灣仔 ➔ 銅鑼灣）',
-      subtitle: '雙層露天復古路面電車慢速街景巡禮',
-      address: '灣仔莊士敦道沿線電車站（東行方向）',
-      hours: '06:00 - 00:00',
-      arrivalTime: '隨上隨搭（八達通刷卡只需 HK$3.0）',
+      timeSlot: '11:45 - 13:15',
+      category: 'FOOD',
+      highlightType: 'pho',
+      title: '蓮香樓 Lin Heung Lau（百年老字號傳統飲茶）',
+      subtitle: '經典阿姐手推點心車、天地人蓋碗普洱茶 ＆ 懷舊粵式名店',
+      address: '香港上環德輔道中 249-253 號東寧大廈地下 9-10 號舖及 1-2 樓（近港鐵上環站 B / A1 出口；原中環威靈頓街舊址因重建搬遷至此，步行僅約 6 分鐘）',
+      hours: '06:00 - 00:00（全日營業）',
+      arrivalTime: '建議 11:45 抵達入座午茶時段（避開大排長龍）',
       transit: {
-        line: '香港電車（叮叮車）',
-        station: '柯布連道 / 巴路士街 電車站',
-        exit: '後門上車，前門下車刷卡',
-        walk: '吃完 Brass Spoon 漫步至莊士敦道電車站'
+        line: '步行自大館順路漫步 ➔ 或上環站',
+        station: '上環站 / 中環站',
+        exit: '上環站 B / A1 出口',
+        walk: '從大館沿荷李活道往上環方向轉急庇利街/禧利街下坡，漫步約 6-8 分鐘即達德輔道中東寧大廈'
       },
-      tagText: '🚋 港島百年雙層電車',
-      tagColor: 'bg-blue-100 text-blue-800 border-blue-300',
-      notes: '一定要坐上層最前排！吹著微風俯瞰香港招牌林立的街道，體驗老香港情懷最惬意方式。'
+      tagText: '🥟 懷舊手推點心車 & 招牌豬潤燒賣',
+      tagColor: 'bg-rose-100 text-rose-800 border-rose-300 font-bold',
+      notes: '【順路午餐·體驗百年推車飲茶文化】全港極少數仍保留阿姐推著點心車巡迴、食客手持點心卡搶剛出爐點心的經典老字號！必拿「豬潤燒賣」（豬肝厚切鮮嫩）、「霸王鴨」、「蜜汁叉燒包」、「鮮蝦腐皮捲」與「香滑馬拉糕」，配上一盅熱水蓋碗茶，深度體驗最地道熱鬧的港式飲茶氛圍！'
     },
     {
       id: 'd3-3',
       day: 3,
       dayTitle: 'Day 3 (9/26 週六)',
-      timeSlot: '15:30 - 17:30',
-      category: 'TOY',
-      highlightType: 'toy',
-      title: '朗豪坊 Langham Place（旺角）',
-      subtitle: '高層動漫扭蛋玩具大本營 ＆ 吉伊卡哇週邊天堂',
-      address: '旺角亞皆老街 8 號（重點逛 10 樓 – 11 樓）',
-      hours: '11:00 - 22:00',
-      arrivalTime: '建議 15:30 抵達悠閒逛街',
+      timeSlot: '13:30 - 15:30',
+      category: 'DRINK',
+      highlightType: 'coffee',
+      title: '蘭桂坊 Lan Kwai Fong ＆ 中環精品咖啡/蛋撻午茶',
+      subtitle: '經典歐陸鵝卵石斜坡酒吧街 ＆ 白天異國漫步／午後 Happy Hour',
+      address: '中環德己立街、蘭桂坊及和安里一帶',
+      hours: '全日開放（街區各特色餐酒館、露天酒吧約 12:00 起營業）',
+      arrivalTime: '建議 13:30 蓮香樓吃飽後散步前來',
       transit: {
-        line: '港鐵 荃灣線 / 觀塘線',
-        station: '旺角站',
-        exit: 'C3 / E1 出口',
-        walk: '旺角站 C3 地下通道直達朗豪坊 B2 樓層'
+        line: '步行自蓮香樓 / 叮叮車體驗',
+        station: '中環站',
+        exit: 'D1 / D2 出口',
+        walk: '沿德輔道中往中環方向步行約 8 分鐘（亦可在蓮香樓門口搭 2 站「叮叮車」至畢打街，再走 3 分鐘轉入德己立街）'
       },
-      tagText: '✨ Chiikawa 吉伊卡哇 & 日系盒玩扭蛋',
-      tagColor: 'bg-purple-100 text-purple-800 border-purple-300',
-      notes: '10-11 樓聚集了大型玩具店、扭蛋區與日系動漫專賣店，吉伊卡哇（Chiikawa）玩偶、文具、限定盲盒品項最齊全！'
+      tagText: '🍸 經典歐美餐酒吧街 & 午後小酌',
+      tagColor: 'bg-purple-100 text-purple-800 border-purple-300 font-bold',
+      notes: '【香港最著名夜生活地標】蘭桂坊白天呈現出截然不同的悠閒歐美氛圍，L 形石板斜坡街道兩旁滿是異國小酒館與戶外露天座位，非常適合散步拍照。💡【順路午茶推薦】：蘭桂坊旁即是中環精品咖啡聚落：\n1. 咖啡控可步行 3 分鐘至 The Cupping Room（閣麟街 18 號）或 NOC Coffee Co.（嘉咸街 34 號）品嚐手沖冠軍咖啡或絲滑 Flat White。\n2. 蛋撻控必訪擺花街 5 號的 Bakehouse 外帶招牌酸種蛋撻！\n3. 若喜愛美式漢堡，擺花街 8 號的 Honbo（手打 Smash Burger）也在同一條街上！'
     },
     {
       id: 'd3-4',
       day: 3,
       dayTitle: 'Day 3 (9/26 週六)',
-      timeSlot: '17:45 - 20:00',
-      category: 'TOY',
-      highlightType: 'toy',
-      title: '現時點 In’s Point ＆ 信和中心（油麻地／旺角）',
-      subtitle: '香港戰鬥陀螺聖地 ＆ Capcom/ACG 模型聚集地',
-      address: '現時點：彌敦道 530-538 號 2 樓 ｜ 信和中心：彌敦道 582 號',
-      hours: '16:00 - 21:30（店家約 16:30 開齊）',
-      arrivalTime: '強烈建議 17:45 抵達（店家最齊全時段）',
+      timeSlot: '16:00 - 19:15',
+      category: 'SCENIC',
+      highlightType: 'scenic',
+      title: '太平山頂纜車 ＆ 凌霄閣摩天台428',
+      subtitle: '第六代綠色復古山頂纜車 ＆ 360° 戶外夜景觀景台',
+      address: '香港中環花園道 33 號山頂纜車總站',
+      hours: '07:30 - 23:00（摩天台開放至 23:00）',
+      arrivalTime: '強烈建議 16:00 - 16:30 抵達花園道纜車站上山',
       transit: {
-        line: '港鐵 荃灣線 / 觀塘線',
-        station: '油麻地站',
-        exit: 'A2 出口',
-        walk: '出站向右轉直走 1 分鐘即達現時點；往旺角方向直走 3 分鐘達信和中心'
+        line: '步行自蘭桂坊 ➔ 中環花園道',
+        station: '中環站 / 金鐘站',
+        exit: '中環站 J2 出口 / 金鐘站 C1 出口',
+        walk: '從蘭桂坊沿德己立街轉皇后大道中，穿過遮打花園與香港公園天橋步行約 10-12 分鐘即達花園道纜車總站'
       },
-      tagText: '🔥 戰鬥陀螺限定抽包/散件 & Capcom模型',
-      tagColor: 'bg-amber-100 text-amber-900 border-amber-400 font-bold',
-      notes: '【全港陀螺核心地標】現時點 2 樓有極多專門店，Beyblade X 稀有抽包、單售配件/零件、特惠整盒應有盡有；信和中心則專攻 Capcom（魔物獵人、快打旋風、惡靈古堡）遊戲周邊與手辦。'
+      tagText: '⭐ 百萬維港黃昏與夜景',
+      tagColor: 'bg-rose-100 text-rose-800 border-rose-300 font-bold',
+      notes: '16:30 上山能同時看到日景、夕陽餘暉與全黑後的百萬夜景。線上先買「纜車+摩天台」二合一套票掃 QR Code 進站最省時。'
     },
     {
       id: 'd3-5',
       day: 3,
       dayTitle: 'Day 3 (9/26 週六)',
-      timeSlot: '20:15 - 21:45',
+      timeSlot: '19:45 - 21:15',
       category: 'FOOD',
       highlightType: 'pho',
-      title: '一點心 One Dim Sum ❤️‍🔥（米其林平價點心天花板）',
-      subtitle: '招牌晶瑩鮮蝦餃、炸蒜魷魚鬚、叉燒包與香煎蘿蔔糕',
-      address: '太子運動場道 15 號京華大廈地舖',
-      hours: '10:00 - 00:00（營業至午夜）',
-      arrivalTime: '建議 20:15 逛完現時點/信和中心後前往',
+      title: '九記牛腩 或 一樂燒鵝（中環經典晚餐）',
+      subtitle: '香港米其林必比登／星級傳統老字號',
+      address: '中環歌賦街 21 號（九記） / 中環士丹利街 34-38 號（一樂）',
+      hours: '12:30 - 22:30（九記週日公休）',
+      arrivalTime: '建議 19:45 纜車下山後前往',
       transit: {
-        line: '港鐵 荃灣線 / 觀塘線',
-        station: '太子站',
-        exit: 'A 出口',
-        walk: '出站步行 2 分鐘（從旺角信和中心搭 1 站港鐵或沿彌敦道步行 10 分鐘）'
+        line: '山頂纜車下山 ➔ 漫步中環',
+        station: '中環站',
+        exit: 'D2 出口',
+        walk: '從花園道纜車站漫步下山至士丹利街約 10 分鐘、歌賦街約 13 分鐘'
       },
-      tagText: '🥟 米其林必比登星級點心宵夜',
-      tagColor: 'bg-rose-100 text-rose-800 border-rose-300 font-bold',
-      notes: '【Threads 清單大推 ❤️‍🔥】全港評價最高且超平價的米其林推薦點心名店！完美解決原大安茶氷廳 19:00 打烊的問題。買完陀螺與動漫周邊後，來籠熱騰騰爆汁鮮蝦餃、蒜香濃郁炸魷魚鬚與流沙包，極致滿足！'
+      tagText: '🍜 濃郁清湯牛腩 / 脆皮燒鵝',
+      tagColor: 'bg-orange-100 text-orange-800 border-orange-300 font-bold',
+      notes: '九記推薦「上湯牛腩粗麵」湯頭鮮甜回甘；一樂燒鵝外皮油亮酥脆，肉質極為軟嫩。只收現金或八達通。💡【夜晚蘭桂坊加碼】：用完晚餐後，蘭桂坊就在士丹利街上方（步行 3 分鐘），此時正是蘭桂坊越夜越熱鬧的微醺酒吧高峰，可隨意選一家戶外酒吧聽音樂小酌，享受完整的香港中環之夜！'
     },
 
     // --- DAY 4 ---
@@ -619,7 +663,7 @@ export default function App() {
       {/* 攻略提示摺疊區塊 */}
       {showTips && (
         <div className="max-w-6xl mx-auto px-4 sm:px-6 pt-6">
-          <div className="bg-amber-50 border border-amber-200 rounded-2xl p-5 shadow-sm text-slate-800 grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div className="bg-amber-50 border border-amber-200 rounded-2xl p-5 shadow-sm text-slate-800 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             <div className="space-y-1">
               <h4 className="font-bold text-amber-900 text-sm flex items-center gap-1.5">
                 <Coffee className="w-4 h-4 text-amber-700" /> 奶茶點單秘訣（不甜又絲滑）
@@ -634,6 +678,14 @@ export default function App() {
               </h4>
               <p className="text-xs text-purple-800 leading-relaxed">
                 <strong>現時點（In’s Point 2F）</strong>店家約 16:30 陸續開齊，陀螺抽包/單售散件最便宜；<strong>朗豪坊 10-11F</strong> 專攻 Chiikawa 盲盒；<strong>海港城玩具"反"斗城</strong> 買盒裝對戰盤最完整。
+              </p>
+            </div>
+            <div className="space-y-1">
+              <h4 className="font-bold text-rose-900 text-sm flex items-center gap-1.5">
+                <Utensils className="w-4 h-4 text-rose-700" /> 蓮香樓推車飲茶 ＆ 蘭桂坊
+              </h4>
+              <p className="text-xs text-rose-800 leading-relaxed">
+                <strong>蓮香樓</strong>保留百年手推點心車，看到阿姐推車即可拿點心卡前往蓋章拿取（必點豬潤燒賣與霸王鴨）；<strong>蘭桂坊</strong>白天悠閒好拍歐式街景，入夜後則化身熱鬧的特色餐酒吧街。
               </p>
             </div>
             <div className="space-y-1">
@@ -653,9 +705,9 @@ export default function App() {
         <div className="bg-white p-1.5 rounded-2xl shadow-sm border border-slate-200/80 flex overflow-x-auto no-scrollbar gap-1">
           {[
             { id: 0, label: '全部行程', sub: '5 天彙整' },
-            { id: 1, label: 'Day 1 (9/24)', sub: '漢堡/咖啡/山頂纜車' },
+            { id: 1, label: 'Day 1 (9/24)', sub: '放行李/越式Pho/陀螺/一點心' },
             { id: 2, label: 'Day 2 (9/25)', sub: '高鐵深圳/牛肉鍋/COCO Park/洗頭/盒馬' },
-            { id: 3, label: 'Day 3 (9/26)', sub: '越式Pho/陀螺/一點心' },
+            { id: 3, label: 'Day 3 (9/26)', sub: '大館/蓮香樓/蘭桂坊/山頂纜車' },
             { id: 4, label: 'Day 4 (9/27)', sub: '滑蛋/海景咖啡/渡輪' },
             { id: 5, label: 'Day 5 (9/28)', sub: '紅茶冰室/伴手禮/返台' },
           ].map(tab => (
